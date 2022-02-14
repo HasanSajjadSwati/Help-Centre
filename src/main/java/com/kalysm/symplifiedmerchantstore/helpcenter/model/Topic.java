@@ -39,8 +39,8 @@ public class Topic implements Serializable {
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
 
-    @Column(name = "heading")
-    private String heading;
+    @Column(name = "title")
+    private String title;
 
     @Column(name = "description")
     private String description;

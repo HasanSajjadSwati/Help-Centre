@@ -29,8 +29,8 @@ public class TopicController {
     private TopicService topicService;
     
     @GetMapping("")
-    public ResponseEntity<List<Topic>> getAllTopics(@RequestParam(required = false) String heading)throws Exception{
-        return topicService.getAllTopics(heading);
+    public ResponseEntity<List<Topic>> getAllTopics(@RequestParam(required = false) String title)throws Exception{
+        return topicService.getAllTopics(title);
     }
     
     @GetMapping("/{id}")

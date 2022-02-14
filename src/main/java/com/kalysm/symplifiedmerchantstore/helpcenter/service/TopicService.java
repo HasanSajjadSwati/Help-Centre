@@ -22,16 +22,16 @@ public class TopicService {
     @Autowired TopicRepository topicRepository;
     
     
-     public ResponseEntity<List<Topic>> getAllTopics(String heading) throws Exception{
+     public ResponseEntity<List<Topic>> getAllTopics(String title) throws Exception{
         
     	try {
     		List<Topic> topics = new ArrayList<>();
     		
-    		if(heading == null)
+    		if(title == null)
     			topicRepository.findAll().forEach(topics::add);
     		
     		else
-    			topicRepository.findByHeading(heading).forEach(topics::add);
+    			topicRepository.findByTitle(title).forEach(topics::add);
     		
     		if(topics.isEmpty())
     			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -118,7 +118,7 @@ public class TopicService {
      public ResponseEntity<String> createTopic(@RequestBody Topic topic) throws Exception{
     	List<Topic> topics = topicRepository.findAll();
         String topicToString = "id = " + topic.getId()+ "\n"
-                + "heading = " + topic.getHeading() + "\n"
+                + "heading = " + topic.getTitle() + "\n"
                 + "description = " + topic.getDescription() + "\n"
                 + "content = " + topic.getContent() + "\n"
                 + "topicLevel = " + topic.getTopicLevel() + "\n"
@@ -127,7 +127,7 @@ public class TopicService {
                 + "parentId = " + topic.getParentId();
         
         for(Topic findTopic : topics){
-            if(findTopic.getHeading().equals(topic.getHeading())){
+            if(findTopic.getTitle().equals(topic.getTitle())){
                 return new ResponseEntity<>("Topic already Exists!",HttpStatus.CONFLICT);
             }
         }
@@ -146,7 +146,7 @@ public class TopicService {
     	
     	if(topicDetails.isPresent()) {
     		Topic updateTopic = topicDetails.get();
-    		updateTopic.setHeading(topic.getHeading());
+    		updateTopic.setTitle(topic.getTitle());
     		updateTopic.setDescription(topic.getDescription());
                 updateTopic.setContent(topic.getContent());
                 updateTopic.setTopicLevel(topic.getTopicLevel());
